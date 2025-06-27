@@ -4,7 +4,7 @@ This repository provides two scripts:
 
 1. **setup_unattended_upgrades.sh** – installs and enables automatic security
    updates on Debian or Ubuntu.
-2. **pull_vaultwarden_backups.py** – optionally sends a short status email
+2. **system_status_email.py** – optionally sends a short status email
    about updates and system resources.
    
 ## Setting up unattended upgrades
@@ -86,7 +86,7 @@ pip install -r requirements.txt
 ```
 
 Once activated, the `venv` directory contains the Python interpreter and
-packages needed to run `pull_vaultwarden_backups.py`.
+packages needed to run `system_status_email.py`.
 
 ### Configuring mail
 
