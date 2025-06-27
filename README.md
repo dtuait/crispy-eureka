@@ -8,6 +8,22 @@ This repository contains two helper scripts:
    security updates and emails a short status report.  It is intended to run
    from cron.
 
+## Getting started with Python
+
+The backup notification script requires Python 3. Create a virtual
+environment and install the dependencies so that modules such as
+`psutil` are available:
+
+```bash
+sudo apt-get install python3-venv  # if not already installed
+python3 -m venv venv
+source venv/bin/activate
+pip install -r requirements.txt
+```
+
+Once activated, the `venv` directory contains the Python interpreter
+and packages needed to run `pull_vaultwarden_backups.py`.
+
 ## Setting up unattended upgrades
 
 Run the following with root privileges:
@@ -22,14 +38,9 @@ security updates are installed automatically.
 
 ## Notification script
 
-The Python script relies on a virtual environment.  Create one and install the
-requirements:
-
-```bash
-python3 -m venv venv
-source venv/bin/activate
-pip install -r requirements.txt
-```
+The backup script runs from the virtual environment created in the
+[Getting started with Python](#getting-started-with-python) section.
+Activate the environment and then configure your mail settings:
 
 Create a file named `.env.local` next to the script containing your mail
 settings:
