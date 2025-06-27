@@ -2,8 +2,8 @@
 
 This repository contains two helper scripts:
 
-1. **setup_unattended_upgrades.sh** – installs and enables the Debian
-   *unattended-upgrades* service.
+1. **setup_unattended_upgrades.sh** – installs and enables the
+   *unattended-upgrades* service on Debian or Ubuntu systems.
 2. **pull_vaultwarden_backups.py** – checks the local system for pending
    security updates and emails a short status report.  It is intended to run
    from cron.
@@ -31,6 +31,9 @@ Run the following with root privileges:
 ```bash
 sudo ./setup_unattended_upgrades.sh
 ```
+
+The script is developed on Debian 12 but is fully compatible with
+Debian 11 and Ubuntu releases.
 
 The script installs the required packages, enables the systemd service and
 creates a basic `/etc/apt/apt.conf.d/20auto-upgrades` configuration so that
