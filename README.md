@@ -4,13 +4,13 @@ This repository contains two helper scripts:
 
 1. **setup_unattended_upgrades.sh** – installs and enables the
    *unattended-upgrades* service on Debian or Ubuntu systems.
-2. **pull_vaultwarden_backups.py** – checks the local system for pending
+2. **system_status_email.py** – checks the local system for pending
    security updates and emails a short status report.  It is intended to run
    from cron.
 
 ## Getting started with Python
 
-The backup notification script requires Python 3. Create a virtual
+The notification script requires Python 3. Create a virtual
 environment and install the dependencies so that modules such as
 `psutil` are available:
 
@@ -22,7 +22,7 @@ pip install -r requirements.txt
 ```
 
 Once activated, the `venv` directory contains the Python interpreter
-and packages needed to run `pull_vaultwarden_backups.py`.
+and packages needed to run `system_status_email.py`.
 
 ## Setting up unattended upgrades
 
@@ -86,7 +86,7 @@ AUTO_REBOOT=0 ./setup_unattended_upgrades.sh
 
 ## Notification script
 
-The backup script runs from the virtual environment created in the
+The notification script runs from the virtual environment created in the
 [Getting started with Python](#getting-started-with-python) section.
 Activate the environment and then configure your mail settings.
 
@@ -101,13 +101,13 @@ SMTP_SERVER=smtp.example.com
 SMTP_PORT=587
 SMTP_USER=your_user
 SMTP_PASS=your_pass
-MAIL_SUBJECT=Vaultwarden Backup Summary
+MAIL_SUBJECT=System Status Report
 ```
 
 Run the script manually to test:
 
 ```bash
-./pull_vaultwarden_backups.py
+./system_status_email.py
 ```
 
 ### Cron example
@@ -115,7 +115,7 @@ Run the script manually to test:
 Add a cron entry to run the script daily at 03:00:
 
 ```
-0 3 * * * /path/to/venv/bin/python /path/to/pull_vaultwarden_backups.py
+0 3 * * * /path/to/venv/bin/python /path/to/system_status_email.py
 ```
 
 The script will email whether security updates are pending as well as basic
