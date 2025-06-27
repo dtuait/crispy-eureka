@@ -54,6 +54,33 @@ Set `AUTO_REBOOT` to `1` (the default) to reboot automatically. Adjust
 `AUTO_REBOOT_TIME` to a suitable maintenance window so updates apply promptly
 without unexpected downtime.
 
+### Example configurations
+
+To run upgrades at a specific time you may edit the `unattended-upgrades.timer`
+unit. For instance, setting `OnCalendar=*-*-* 02:00` will start applying
+updates at 02:00. Combine this with `AUTO_REBOOT_TIME` to control when the
+system reboots if required.
+
+#### Optimized for security
+
+Apply updates early and reboot soon after:
+
+```bash
+AUTO_REBOOT=1 AUTO_REBOOT_TIME=02:00 ./setup_unattended_upgrades.sh
+```
+
+#### Optimized for uptime
+
+Delay the reboot to a quieter period, or disable it entirely:
+
+```bash
+# run updates at 02:00, reboot later if needed
+AUTO_REBOOT=1 AUTO_REBOOT_TIME=04:00 ./setup_unattended_upgrades.sh
+
+# no automatic reboot
+AUTO_REBOOT=0 ./setup_unattended_upgrades.sh
+```
+
 ## Notification script
 
 The backup script runs from the virtual environment created in the
