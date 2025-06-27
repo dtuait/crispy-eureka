@@ -60,8 +60,9 @@ The backup script runs from the virtual environment created in the
 [Getting started with Python](#getting-started-with-python) section.
 Activate the environment and then configure your mail settings.
 
-Copy the provided `.env.example` to `.env.local` next to the script and
-adjust the values to match your environment:
+Copy the provided `.env.local.example` to `.env.local` next to the script and
+adjust the values to match your environment. A quick way to create the file is
+to run `cp .env.local.example .env.local`:
 
 ```
 FROM_ADDR=you@example.com
