@@ -6,7 +6,7 @@ This repository provides two scripts:
    updates on Debian or Ubuntu.
 2. **pull_vaultwarden_backups.py** – optionally sends a short status email
    about updates and system resources.
-
+   
 ## Setting up unattended upgrades
 
 Run the following with root privileges:
@@ -101,13 +101,13 @@ SMTP_SERVER=smtp.example.com
 SMTP_PORT=587
 SMTP_USER=your_user
 SMTP_PASS=your_pass
-MAIL_SUBJECT=Vaultwarden Backup Summary
+MAIL_SUBJECT=System Status Report
 ```
 
 Run the script manually to test:
 
 ```bash
-./pull_vaultwarden_backups.py
+./system_status_email.py
 ```
 
 ### Cron example
@@ -115,7 +115,7 @@ Run the script manually to test:
 Add a cron entry to run the script daily at 03:00:
 
 ```
-0 3 * * * /path/to/venv/bin/python /path/to/pull_vaultwarden_backups.py
+0 3 * * * /path/to/venv/bin/python /path/to/system_status_email.py
 ```
 
 The script will email whether security updates are pending as well as basic
