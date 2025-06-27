@@ -36,6 +36,24 @@ The script installs the required packages, enables the systemd service and
 creates a basic `/etc/apt/apt.conf.d/20auto-upgrades` configuration so that
 security updates are installed automatically.
 
+### Balancing security and uptime
+
+`setup_unattended_upgrades.sh` reboots the host whenever a package requires it.
+This keeps the system as secure as possible but may reduce uptime. The
+behaviour can be tuned using environment variables when running the script:
+
+```bash
+# disable reboots after upgrades
+AUTO_REBOOT=0 ./setup_unattended_upgrades.sh
+
+# or change the reboot time (defaults to 02:00)
+AUTO_REBOOT_TIME=04:00 ./setup_unattended_upgrades.sh
+```
+
+Set `AUTO_REBOOT` to `1` (the default) to reboot automatically. Adjust
+`AUTO_REBOOT_TIME` to a suitable maintenance window so updates apply promptly
+without unexpected downtime.
+
 ## Notification script
 
 The backup script runs from the virtual environment created in the
