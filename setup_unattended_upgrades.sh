@@ -1,7 +1,7 @@
 #!/usr/bin/env bash
 set -euo pipefail
 
-# Install and enable unattended-upgrades on Debian 12
+# Install and enable unattended-upgrades on Debian or Ubuntu
 #
 # The behaviour can be tuned through the following environment variables:
 #   AUTO_REBOOT="1"   - automatically reboot if required after upgrades.
@@ -16,8 +16,28 @@ set -euo pipefail
 
 AUTO_REBOOT="${AUTO_REBOOT:-1}"
 AUTO_REBOOT_TIME="${AUTO_REBOOT_TIME:-02:00}"
+
+# Check OS compatibility
+source /etc/os-release
+case "${ID}" in
+    debian)
+        major=${VERSION_ID%%.*}
+        if [ "$major" -lt 11 ]; then
+            echo "Debian 11 or newer required" >&2
+            exit 1
+        fi
+        ;;
+    ubuntu)
+        # Ubuntu releases are supported as-is
+        ;;
+    *)
+        echo "This script supports Debian or Ubuntu only." >&2
+        exit 1
+        ;;
+esac
 sudo apt-get update
-sudo apt-get install -y unattended-upgrades apt-listchanges
+sudo DEBIAN_FRONTEND=noninteractive \
+    apt-get install -y unattended-upgrades apt-listchanges
 
 # Configure unattended-upgrades non-interactively
 sudo dpkg-reconfigure --frontend=noninteractive unattended-upgrades
